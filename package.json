@@ -1,6 +1,6 @@
 {
   "name": "univalid-strategy-form",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Form strategy implementation for univalid module (extends 'univalid-strategy')",
   "main": "index.js",
   "scripts": {},
@@ -9,16 +9,16 @@
     "url": "git+https://github.com/StetsD/univalid-strategy-form.git"
   },
   "keywords": [
-	  "password",
-      "input",
-      "univalid",
-      "validation",
-      "univalid-strategy-form",
-      "univalid-strategy",
-      "strategy",
-      "check",
-      "validate",
-	  "form"
+    "password",
+    "input",
+    "univalid",
+    "validation",
+    "univalid-strategy-form",
+    "univalid-strategy",
+    "strategy",
+    "check",
+    "validate",
+    "form"
   ],
   "author": "'StetsD' <chortstd@gmail.com>",
   "license": "ISC",
@@ -28,10 +28,10 @@
   "homepage": "https://github.com/StetsD/univalid-strategy-form#readme",
   "devDependencies": {},
   "dependencies": {
-	  "axios": "^0.18.0",
-      "form-serialize": "^0.7.2",
-      "pass-power": "^1.0.0",
-	  "univalid-key-logger": "^1.0.0",
-	  "univalid-strategy": "^1.0.0"
+    "axios": "^0.18.0",
+    "form-serialize": "^0.7.2",
+    "pass-power": "^1.0.0",
+    "univalid-key-logger": "^1.0.0",
+    "univalid-strategy": "^1.0.0"
   }
 }
