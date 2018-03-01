@@ -30,7 +30,7 @@
   "dependencies": {
 	  "axios": "^0.18.0",
       "form-serialize": "^0.7.2",
-      "pass-power": "^0.7.2",
+      "pass-power": "^1.0.0",
 	  "univalid-key-logger": "^1.0.0",
 	  "univalid-strategy": "^1.0.0"
   }
