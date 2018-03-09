@@ -18,7 +18,7 @@ const Univalid = require('univalid');
 const UnivalidStrategyForm = require('univalid-strategy-form');
 const univalid = Univalid();
 
-// set strategy
+// Base initialize (set strategy)
 
 univalid.setStrategy(
     UnivalidStrategyForm({
@@ -116,20 +116,20 @@ Clear statuses of form and fields
 Pack of html nodes inputs, selects, textareas
 
 ```js
-univalid.get('clearStatuses', {/* [ nodes ] */});
+univalid.get('clearStatuses', [/* [ nodes ] */]);
 ```
 
 
 ### clearInputs(inputs)
 
-Clear statuses of form and fields
+Clear input values
 
 **inputs** - Type `node or nodeList`
 
 May be one node or array of nodes
 
 ```js
-univalid.get('clearInputs', {/* [ inputs ] */});
+univalid.get('clearInputs', [/* [ inputs ] */]);
 ```
 
 
@@ -204,11 +204,136 @@ univalid.get('passConfig');
 
 Type `object`
 
-**Required Prop**
+**! Required Prop**
 
-This is instance 'univalid'
+This is instance 'univalid' module
 
-Must be define
+Must be define on init 
+
+
+### $form
+
+Type `string`
+
+**! Required Prop**
+
+Form selector
+
+
+### clsConfig
+
+Type `object`
+
+Default `{error: 'error', success: 'success'}`
+
+ClassName config
+
+
+### passConfig
+
+Type `object`
+
+Default `{min: 6, analysis: ['hasUppercase', 'hasLowercase', 'hasDigits', 'hasSpecials']`
+
+Password config
+
+```js
+univalid.set('passConfig', {
+    min: 10,
+    analysis: ['hasUppercase']
+});
+```
+
+
+### statusConfig
+
+Type `object`
+
+Statuses config
+
+```js
+univalid.set('statusConfig', {
+    targetParent: '.form-group',
+    targetStatus: '.form__msg',
+    successStatus: true /* if show success status */
+});
+```
+
+
+### sendConfig
+
+Type `object`
+
+SendForm config
+
+```js
+univalid.set('sendConfig', {
+    type: 'method',
+    url: '/form',
+    notDisableSubmit: true
+});
+```
+
+
+### keyLogger
+
+Type `boolean`
+
+On\off keyLogger filters
+
+```js
+univalid.set('keyLogger', true);
+```
+
+
+### checkPassScore
+
+Type `object`
+
+CheckPasswordScore config
+
+```js
+univalid.set('checkPassScore', {
+    target: 'input[type="password"]',
+    cb: val => {
+        console.log(val);
+    }
+});
+```
+
+
+## EVENTS
+
+You can subscribe on univalid or univalid-strategy-form events.
+
+```js
+
+univalid.on('start:valid', (args) => {
+    console.log('Check!');
+});
+
+```
+
+**Table of events**
+
+| Event | Description |
+|:------:|:-----------:|
+|start:valid|Start validation pack|
+|end:valid|End validation pack|
+|start:valid:field|Start validation field|
+|end:valid:field|End validation field|
+|change:strategy|Change strategy event|
+|set:new-ValidationHandler|Set new ValidationHandler event|
+|change:msg-config|Change message config event|
+|clear:state|Clear state of last validation event|
+|e:submit|Submit form|
+|e:blur|Blur event on current input|
+|e:focus|Focus event on current input|
+|e:keyup|Keyup event on current input|
+|error|Error event|
+|clear:statuses|Clear statuses event|
+|send:form|Send form event|
+|clear:inputs|Clear inputs|
 
 ## License
 ISC ©
