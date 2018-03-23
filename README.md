@@ -14,9 +14,8 @@ npm i univalid-strategy-form
 ## Usage
 
 ```js
-const Univalid = require('univalid');
+const univalid = require('univalid')();
 const UnivalidStrategyForm = require('univalid-strategy-form');
-const univalid = Univalid();
 
 // Base initialize (set strategy)
 
@@ -28,6 +27,91 @@ univalid.setStrategy(
 );
 ```
 
+## Setting data-validation in .html
+
+Add to your html form elements (inputs, selects, textarea) 'data-validation=[type]'
+
+In current time supports next types:
+
+- **required**
+- **email**
+- **password**
+- **equal** - (equal password type)
+
+```html
+<div class="form-group">
+    <label>Username</label>
+    
+    <input 
+        type="text" 
+        name="username" 
+        class="form-control" 
+        data-validation="required">
+        
+    <div class="form__msg"></div>
+</div>
+```
+
+
+## Setting data-msg in .html
+
+You are also can define message (empty, invalid, filter, success) for individual input
+
+Add to your html form elements (inputs, selects, textarea) 'data-msg=[type]'
+
+type:
+- **empty**
+- **invalid** - ValidationHandler error
+- **filter** - Filter error ([univalid-key-logger](https://github.com/StetsD/univalid-key-logger) module)
+- **success**
+
+##### ! data-msg must be a valid JSON type
+
+```html
+<div class="form-group">
+    <label>Username</label>
+    
+    <input 
+        type="text" 
+        name="username" 
+        class="form-control" 
+        data-validation="required" 
+        data-msg='{"empty":"This Filed empty", "invalid": "This Field Invalid", "filter": "Latin Only", "success": "Is Ok"}'>
+        
+    <div class="form__msg"></div>
+</div>
+```
+
+
+## Setting data-f in .html
+
+You can define filer`s handler for individual input
+
+It Handled 'keyboard' events
+
+Add to your html form elements (inputs, selects, textarea) 'data-f=[type]'
+
+In current moment available patterns supporting types:
+
+- **oL** - only latin symbols
+- **oC** - only cyrillic symbols
+- **oN** - only numbers
+- **oP** - only numbers and latin symbols
+
+```html
+<div class="form-group">
+    <label>Username</label>
+    
+    <input 
+        type="text" 
+        name="username" 
+        class="form-control" 
+        data-f="oL" 
+        data-validation="required">
+    
+    <div class="form__msg"></div>
+</div>
+```
 
 ## API
 

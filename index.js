@@ -144,15 +144,15 @@ module.exports = (opt) => {
 		}
 
 		send({
-			newAjaxBody = this.sendConfig,
-			cbSendSuccess = this.sendConfig.cbSendSuccess,
-			cbSendError = this.sendConfig.cbSendError,
+			newAjaxBody = this.sendConfig || {},
+			cbSendSuccess = this.sendConfig ? this.sendConfig.cbSendSuccess : null,
+			cbSendError = this.sendConfig ? this.sendConfig.cbSendError : null,
 		} = {}){
 			if(newAjaxBody){
 				this.core.emit('send:form', this.core);
-				let type = (newAjaxBody.type === 'method') ? this.$form.getAttribute('method') : newAjaxBody.type,
-					url = (newAjaxBody.url === 'action') ? this.$form.getAttribute('action') : newAjaxBody.url,
-					data = (!newAjaxBody.data) ? serialize(this.$form, {hash: true}) : newAjaxBody.data,
+                let type = !newAjaxBody.type ? this.$form.getAttribute('method') : newAjaxBody.type,
+                    url = !newAjaxBody.url ? this.$form.getAttribute('action') : newAjaxBody.url,
+                    data = !newAjaxBody.data ? serialize(this.$form, {hash: true}) : newAjaxBody.data,
 					notDisableSubmit = newAjaxBody.notDisableSubmit;
 				let $submit = this.$form.querySelector('[type="submit"]');
 
@@ -178,15 +178,15 @@ module.exports = (opt) => {
 			}
 		}
 
-	    check(pack, core){
+        check(pack = collectNodes(this.$form)){
 			let packageValidation = collectPackage(pack, err => this.core.emit('error', err));
 
 			for(let i = 0; i < packageValidation.length; i++){
-				core.validate(packageValidation[i]);
+                this.core.validate(packageValidation[i]);
 			}
 
 			this.clearStatuses(pack);
-			setResult(core.getState, this, err => this.core.emit('error', err));
+            setResult(this.core.getState, this, err => this.core.emit('error', err));
 	    }
 
 		clearInputs(inputs){
