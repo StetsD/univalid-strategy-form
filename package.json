@@ -1,6 +1,6 @@
 {
   "name": "univalid-strategy-form",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Form strategy implementation for univalid module (extends 'univalid-strategy')",
   "main": "index.js",
   "scripts": {},
