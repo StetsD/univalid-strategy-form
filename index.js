@@ -39,7 +39,7 @@ module.exports = (opt) => {
 							}
 							if(validType){
 								if(!keyLogger.applyFilter(validType, val)){
-									this.core.check(collectNodes(this.$form, elem));
+                                    this.core.check([elem]);
 								}
 							}
 						}
@@ -69,7 +69,7 @@ module.exports = (opt) => {
 								validType = elem.getAttribute('data-f');
 
 							if(!keyLogger.applyFilter(validType, val)){
-								this.core.check(collectNodes(this.$form, elem));
+                                this.core.check([elem]);
 								return false;
 							}else{
 								this.clearStatuses([e.target]);
@@ -179,6 +179,8 @@ module.exports = (opt) => {
 		}
 
         check(pack = collectNodes(this.$form)){
+            this.core.clearState();
+
 			let packageValidation = collectPackage(pack, err => this.core.emit('error', err));
 
 			for(let i = 0; i < packageValidation.length; i++){

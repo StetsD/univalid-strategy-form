@@ -6,7 +6,10 @@ Extends [univalid-strategy](https://github.com/StetsD/univalid-strategy) class
 
 ## Install
 
+##### You need also install [univalid](https://github.com/StetsD/univalid) module, it is a core of validation, which manage different strategies.
+
 ```sh
+npm i univalid
 npm i univalid-strategy-form
 ```
 
