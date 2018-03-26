@@ -56,6 +56,43 @@ In current time supports next types:
 ```
 
 
+## Setting your custom data-validation in .html / js
+
+Do not forget that you have opportunity to set your custom validation handler.
+
+Like this:
+
+#### In .html
+```html
+<div class="form-group">
+    <label>Username</label>
+    
+    <input 
+        type="text" 
+        name="username" 
+        class="form-control" 
+        data-validation="my:valid">
+        
+    <div class="form__msg"></div>
+</div>
+```
+
+#### In .js
+```js
+//input the 'example'
+univalid.setValidHandler({ 
+  'my:valid': val => { 
+    if(val.match(/^example$/)){ 
+      return true; 
+    }else{ 
+      return false; 
+    } 
+  } 
+});
+```
+
+[Also see](https://github.com/StetsD/univalid#setvalidhandlerpack)
+
 ## Setting data-msg in .html
 
 You are also can define message (empty, invalid, filter, success) for individual input
@@ -84,6 +121,10 @@ type:
     <div class="form__msg"></div>
 </div>
 ```
+
+- [Also see](https://github.com/StetsD/univalid#setmsgconfigconfig) how to set and edit default 'msgConfig'
+- [Also see](https://github.com/StetsD/univalid#setdefaultmsgconfigconfig) how to set common global 'msgConfig' for collections of forms
+- [Also see](https://github.com/StetsD/univalid#toggledefaultmsgconfig) how to toggle form on common global 'msgConfig'
 
 
 ## Setting data-f in .html
@@ -386,6 +427,37 @@ univalid.set('checkPassScore', {
         console.log(val);
     }
 });
+```
+
+
+## UNIVALID API
+
+Do not forget that you are also may use all methods from API univalid module.
+
+**Several examples**
+```js
+// getCommonState - return common state ('success' or 'error')
+univalid.get('check');
+if(univalid.getCommonState === 'success'){
+    univalid.get('send');
+}
+
+
+// getState - return last state of validation
+univalid.get('check');
+console.log(univalid.getState);
+
+
+// clearState - clear last state of validation
+univalid.get('check');
+console.log(univalid.getState);
+univalid.clearState();
+
+// getStrategy - return current strategy
+console.log(univalid.getStrategy);
+
+// getValidHandler - return current validation handlers
+console.log(univalid.getValidHandler);
 ```
 
 

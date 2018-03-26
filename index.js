@@ -181,7 +181,7 @@ module.exports = (opt) => {
         check(pack = collectNodes(this.$form)){
             this.core.clearState();
 
-			let packageValidation = collectPackage(pack, err => this.core.emit('error', err));
+	        let packageValidation = collectPackage(pack, this.$form, err => this.core.emit('error', err));
 
 			for(let i = 0; i < packageValidation.length; i++){
                 this.core.validate(packageValidation[i]);
