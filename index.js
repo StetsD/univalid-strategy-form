@@ -130,7 +130,9 @@ module.exports = (opt) => {
 				return this.core.emit('error', 'Not determined "statusConfig" property in UnivalidStrategyForm. Can`t clear statuses');
 			}
 
-			pack.forEach(elem => {
+            let relevantPack = pack ? pack : collectNodes(this.$form);
+
+            relevantPack.forEach(elem => {
 				let parent = elem.closest(this.statusConfig.targetParent),
 					statusContainer = parent.querySelector(this.statusConfig.targetStatus);
 

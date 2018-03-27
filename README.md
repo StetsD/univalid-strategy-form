@@ -245,6 +245,10 @@ Pack of html nodes inputs, selects, textareas
 
 ```js
 univalid.get('clearStatuses', [/* [ nodes ] */]);
+
+// or clear all statuses of form
+
+univalid.get('clearStatuses');
 ```
 
 
@@ -453,8 +457,10 @@ univalid.get('check');
 console.log(univalid.getState);
 univalid.clearState();
 
+
 // getStrategy - return current strategy
 console.log(univalid.getStrategy);
+
 
 // getValidHandler - return current validation handlers
 console.log(univalid.getValidHandler);
