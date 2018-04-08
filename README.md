@@ -14,7 +14,9 @@ npm i univalid-strategy-form
 ```
 
 
-## Usage
+## Base usage
+
+### .js
 
 ```js
 const univalid = require('univalid')();
@@ -25,9 +27,54 @@ const UnivalidStrategyForm = require('univalid-strategy-form');
 univalid.setStrategy(
     UnivalidStrategyForm({
         core: univalid, /* required prop */
-        $form: '.js-reg-form' /* required prop */
+        $form: '.js-reg-form', /* required prop */
+		statusConfig: {
+			targetParent: '.form-group',
+			targetStatus: '.form__msg'
+		}
     })
 );
+
+univalid.on('end:valid', uni => {
+	console.log(uni.getCommonState, uni.getState);
+	uni.clearState();
+});
+```
+
+### .html
+
+```html
+<form action="/" method="POST" class="js-reg-form">
+
+    <div class="form-group">
+        <label>Username</label>
+        <input 
+            name="username"
+            data-validation="required"
+            data-f="oL"
+            data-msg='{"empty":"This Filed empty", "invalid": "This Field Invalid", "filter": "Latin Only", "success": "Is Ok"}'>
+        <div class="form__msg"></div>
+    </div>
+    
+    <div class="form-group">
+        <label>Lastname</label>
+        <input 
+            name="lastname"
+            data-validation 
+            data-f="oC">
+        <div class="form__msg"></div>
+    </div>
+    
+    <div class="form-group">
+        <label>Email address</label>
+        <input 
+            name="email"
+            data-validation="email">
+        <div class="form__msg"></div>
+    </div>
+    
+</form>
+
 ```
 
 ## Setting data-validation in .html
@@ -189,7 +236,15 @@ name, val, type - required fields
         name: 'email',
         val: 'Uriy@mzf.com',
         type: 'email',
-        filter: /[a-z]|\s/gi,
+        filter: val => {
+            // Your custom filter
+            
+            console.log('Filter', val);
+            
+            // if FilterHandler is Ok then "return true"
+                return true;
+            // else "return false"
+        },
         msg: {
             empty: 'You shall not pass',
             invalid: 'Bad email',
