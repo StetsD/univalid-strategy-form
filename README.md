@@ -290,6 +290,54 @@ univalid.get('send', {/* options */});
 The instance of 'univalid' module
 
 
+### setStatuses(pack)
+
+Method of set custom statuses
+
+**pack** - Type `array`
+
+Each field of item of array must be strict named.
+
+Item of pack must have three required field "name", "state", "msg".
+
+```js
+
+univalid.get('setStatuses', [
+    {
+        "name": "username",
+        "state": "error",
+        "msg": "this username is used"
+    },
+    {
+        "name": "email",
+        "state": "error",
+        "msg": "this email is used"
+    }
+]);
+
+```
+
+Example below shows how may to set statuses on inputs of form after get server validation result
+
+```js
+
+univalid.setStrategy(UnivalidStrategyForm({
+    // ...
+
+    sendConfig: {
+        type: 'post',
+        url: 'registration',
+        cbSendError: (err, form) => {
+            form.setStatuses(err.response);
+        }
+    },
+
+    // ...
+}));
+
+```
+
+
 ### clearStatuses(pack)
 
 Clear statuses of form and fields
@@ -457,7 +505,13 @@ SendForm config
 univalid.set('sendConfig', {
     type: 'method',
     url: '/form',
-    notDisableSubmit: true
+    notDisableSubmit: true,
+    cbSendSuccess: (res, univalidStrategyFormInstance) => {
+        console.log(res, univalidStrategyFormInstance)
+    },
+    cbSendError: (err, univalidStrategyFormInstance) => {
+        console.log(err.response, univalidStrategyFormInstance);
+    }
 });
 ```
 
